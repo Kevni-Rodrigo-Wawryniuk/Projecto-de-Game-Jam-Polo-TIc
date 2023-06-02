@@ -6,6 +6,13 @@ public class Obstaculo : MonoBehaviour
 {
     [SerializeField] public static Obstaculo obstaculo;
 
+    [Header("componentes")]
+    [SerializeField] Rigidbody2D RgbObs;
+    [SerializeField] float fuerzaDeMovimiento;
+
+    [Header("Rotacion")]
+    [SerializeField] float Rotar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,21 +20,27 @@ public class Obstaculo : MonoBehaviour
         {
             obstaculo = this;
         }
+        StartProgram();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        MoverOpstaculo();
     }
 
     void StartProgram()
     {
-        
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+        RgbObs = GetComponent<Rigidbody2D>();
 
+        if (ControlBotton.controlBotton.dificultad == 0)
+        {
+            fuerzaDeMovimiento = Random.Range(12, 16);
+        }
+        if (ControlBotton.controlBotton.dificultad == 1)
+        {
+            fuerzaDeMovimiento = Random.Range(16, 20);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,4 +50,18 @@ public class Obstaculo : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    void MoverOpstaculo()
+    {
+
+        transform.Rotate(new Vector3(0, 0, Rotar * Time.deltaTime));
+
+        RgbObs.velocity = new Vector2(-fuerzaDeMovimiento, RgbObs.velocity.y);
+
+        if(transform.position.x <= -11)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    
 }

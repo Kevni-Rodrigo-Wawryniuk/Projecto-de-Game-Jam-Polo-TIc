@@ -6,14 +6,15 @@ TagManager:
   tags:
   - Rigth
   - Left
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Obstaculo
   - 
   - 
   - 
