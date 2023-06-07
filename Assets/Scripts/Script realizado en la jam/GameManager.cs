@@ -83,9 +83,12 @@ public class GameManager : MonoBehaviour
 
     public void BotonPantallaDificultad()
     {
-        pantalla0 = !pantalla0;
-        pantalla1 = !pantalla1;
-        sonidoBoton.Play();
+        if (iniciarJuego == false)
+        {
+            pantalla0 = !pantalla0;
+            pantalla1 = !pantalla1;
+            sonidoBoton.Play();
+        }
     }
     public void BotonSalirDelJuego()
     {
@@ -118,22 +121,28 @@ public class GameManager : MonoBehaviour
     }
     public void BotonRecargaEscena()
     {
-        sonidoBoton.Play();
+        if (estasMuerto == true || ganaste == true)
+        {
+            sonidoBoton.Play();
 
-        SceneManager.LoadScene(0);
+            SceneManager.LoadScene(0);
+        }
     }
     public void BotonSeleccionarDificultad()
     {
-        sonidoBoton.Play();
-
-        if (dificultad > 1)
+        if (iniciarJuego == false)
         {
-            dificultad = 0;
+            sonidoBoton.Play();
+
+            if (dificultad > 1)
+            {
+                dificultad = 0;
+            }
+
+            imagenesActivas = !imagenesActivas;
+
+            dificultad++;
         }
-
-        imagenesActivas = !imagenesActivas;
-
-        dificultad++;
     }
 
     void ControlDePantallas()
