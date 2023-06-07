@@ -9,10 +9,6 @@ public class MainPlayer : MonoBehaviour
 {
     [SerializeField] public static MainPlayer mainPlayer;
 
-    [Header("componentes")]
-    [SerializeField] Rigidbody2D rgbdMp;
-    [SerializeField] BoxCollider2D cajaDeColicion;
-
     [Header("Movimiento")]
     [SerializeField] public bool mover;
     [SerializeField] float vectorY;
@@ -21,11 +17,11 @@ public class MainPlayer : MonoBehaviour
     [SerializeField] float fuerzaX;
     [SerializeField] bool obstaculo, powerUp;
     [SerializeField] float tiempoEP, finTiempoEP;
-    [SerializeField] public bool pausa;
 
     [Header("habilidad")]
     [SerializeField] float tiempoH;
     [SerializeField] public float hability;
+    [SerializeField] bool habilidadActiva;
 
     [Header("Sonido")]
     [SerializeField] AudioSource sonidoHabilidad;
@@ -34,6 +30,9 @@ public class MainPlayer : MonoBehaviour
 
     [Header("Particulas")]
     [SerializeField] ParticleSystem particulas;
+
+    [Header("GameManager")]
+    [SerializeField] GameObject gamemanager;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +49,6 @@ public class MainPlayer : MonoBehaviour
     {
         Moverce();
         CuandoColliciona();
-        PausarJuego();
         Perder();
     }
 
@@ -71,7 +69,10 @@ public class MainPlayer : MonoBehaviour
                 sonidoFrutas[2].Play();
             }
             powerUp = true;
-            hability += 1;
+            if (hability < 3)
+            {
+                hability++;
+            }
         }
 
         if (collision.gameObject.CompareTag("Left"))
@@ -82,44 +83,29 @@ public class MainPlayer : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            GameManager.gameManager.ganaste = true;
+            gamemanager.GetComponent<GameManager>().iniciarJuego = true;
+            gamemanager.GetComponent<GameManager>().estasMuerto = false;
+            gamemanager.GetComponent<GameManager>().ganaste = true;
             mover = false;
             Destroy(this.gameObject);
-            GameManager.gameManager.sonidoMenu.Play();
-            GameManager.gameManager.sonidoPrincipal.Stop();
+            gamemanager.GetComponent<GameManager>().sonidoMenu.Play();
+            gamemanager.GetComponent<GameManager>().sonidoPrincipal.Stop();
         }
     }
 
     void StartProgram()
     {
-        rgbdMp = GetComponent<Rigidbody2D>();
-        cajaDeColicion = GetComponent<BoxCollider2D>();
+        hability = 0;
         mover = true;
-        
+
+        gamemanager = GameObject.FindGameObjectWithTag("Manager");
     }
 
     void Moverce()
     {
- 
-
         if (mover == true)
         {
-
-            /*
-            if (Input.GetKey(KeyCode.W))
-            {
-                rgbdMp.velocity = new Vector2(rgbdMp.velocity.x, vectorY);
-            }
-            else if (Input.GetKey(KeyCode.S))
-            {
-                rgbdMp.velocity = new Vector2(rgbdMp.velocity.x, -vectorY);
-            }
-            else
-            {
-                rgbdMp.velocity = new Vector2(0, 0);
-            }
-            */
-
+            // Mover al personaje por los lugares disponibles
             if( Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 transform.position = new Vector2(transform.position.x, transform.position.y + 1);
@@ -127,86 +113,76 @@ public class MainPlayer : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
                 transform.position = new Vector2(transform.position.x, transform.position.y - 1);
-            }
-            
+            }        
+            // Limitar los movimietnos
                 transform.position = new Vector2(Mathf.Clamp(transform.position.x, -12, 9), Mathf.Clamp(transform.position.y, -3.3f, -1.3f));
-            
-        }
 
-        if (Input.GetKeyDown(KeyCode.Space) && hability >= 3)
-        {
-            StartCoroutine(Habilidad());
-            hability = 0;
-            sonidoHabilidad.Play();
-            particulas.Play();
-        }
-    }
- 
-    public void PausarJuego()
-    {
-        if (GameManager.gameManager.iniciarJuego == true && GameManager.gameManager.estasMuerto == false)
-        {
-            GameManager.gameManager.pantallas[1].enabled = pausa;
-            
-            if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
-            {
-                pausa = !pausa;
-                mover = !mover;
-            }
 
-            if (pausa == true)
+            if (hability >= 3)
             {
-                Time.timeScale = 0;
+                habilidadActiva = true;
             }
-            else if (pausa == false)
+           
+            // Usar la habilidad 
+            if (Input.GetKeyDown(KeyCode.Space) && hability == 3 && habilidadActiva == true)
             {
-                Time.timeScale = 1;
+                StartCoroutine(Habilidad());
+                hability = 0;
+                sonidoHabilidad.Play();
+                particulas.Play();
             }
         }
     }
     void CuandoColliciona()
     {
-        // Colisiona con una fruta
-        if (powerUp == true && obstaculo == false && tiempoEP < finTiempoEP)
-        {
-            tiempoEP += 1 * Time.deltaTime;
-
-            rgbdMp.velocity = new Vector2(fuerzaX, rgbdMp.velocity.y);
-        }
-
-           // Colisiona con una basura
-        if (obstaculo == true && powerUp == false && tiempoEP < finTiempoEP)
-        {
-            tiempoEP += 1 * Time.deltaTime;
-
-            rgbdMp.velocity = new Vector2(-fuerzaX, rgbdMp.velocity.y);
-        }
-
         if (tiempoEP >= finTiempoEP)
         {
+            tiempoEP = 0;
             powerUp = false;
             obstaculo = false;
-            tiempoEP = 0;
-
-            rgbdMp.velocity = new Vector2(0, rgbdMp.velocity.y);
         }
-        if (obstaculo == true && powerUp == true)
-        {
-            obstaculo = false;
-            powerUp = false;
-            tiempoEP = 0;
 
-            rgbdMp.velocity = new Vector2(0, rgbdMp.velocity.y);
+        // Colisiona con una fruta
+        if (powerUp == true)
+        {
+            tiempoEP += 1 * Time.deltaTime;
+
+            if (tiempoEP < finTiempoEP)
+            {
+                transform.position = new Vector2(transform.position.x + fuerzaX * Time.deltaTime, transform.position.y);
+            }
+
+            if (obstaculo == true)
+            {
+                powerUp = false;
+            }
+        }
+        // Colisiona con una basura
+        if (obstaculo == true)
+        {
+            tiempoEP += 1 * Time.deltaTime;
+
+            if (tiempoEP < finTiempoEP)
+            {
+                transform.position = new Vector2(transform.position.x - fuerzaX * Time.deltaTime, transform.position.y);
+            }
+
+            if (powerUp == true)
+            {
+                obstaculo = false;
+            }
         }
     }
     void Perder()
     {
         if (transform.position.x < -9)
         {
-            GameManager.gameManager.estasMuerto = true;
+            gamemanager.GetComponent<GameManager>().iniciarJuego = true;
+            gamemanager.GetComponent<GameManager>().estasMuerto = true;
+            gamemanager.GetComponent<GameManager>().ganaste = false;
             mover = false;
-            GameManager.gameManager.sonidoMenu.Play();
-            GameManager.gameManager.sonidoPrincipal.Stop();
+            gamemanager.GetComponent<GameManager>().sonidoMenu.Play();
+            gamemanager.GetComponent<GameManager>().sonidoPrincipal.Stop();
             Destroy(this.gameObject);
         }
     }
@@ -216,11 +192,13 @@ public class MainPlayer : MonoBehaviour
         mover = false;
         obstaculo = false;
         powerUp = true;
+        habilidadActiva = true;
 
         yield return new WaitForSeconds(tiempoH);
 
         mover = true;
         powerUp = false;
         obstaculo = false;
+        habilidadActiva = false;
     }
 }

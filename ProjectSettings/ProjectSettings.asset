@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: En la carretera no
   productName: Projecto de Game Jam Polo TIc
-  defaultCursor: {fileID: 2800000, guid: 0ccc508108fa6ed4fa11b4a467d7f609, type: 3}
+  defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1

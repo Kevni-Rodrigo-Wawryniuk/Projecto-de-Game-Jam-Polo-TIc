@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rgbPU: {fileID: 0}
-  fuerzaDeMovimietno: 2
-  rotar: 0
+  fuerzaDeMovimietno: 3
+  rotar: 200
 --- !u!1001 &6083921887378296884
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -400,9 +400,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2047483751}
-        m_TargetAssemblyTypeName: ControlBotton, Assembly-CSharp
-        m_MethodName: Facil
+      - m_Target: {fileID: 1117509944}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BotonSeleccionarDificultad
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -999,9 +999,8 @@ GameObject:
   - component: {fileID: 779790848}
   - component: {fileID: 779790847}
   - component: {fileID: 779790846}
-  - component: {fileID: 779790845}
   m_Layer: 0
-  m_Name: Back Ground (2)
+  m_Name: Back Ground Troncos claros
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1021,20 +1020,6 @@ Transform:
   m_Father: {fileID: 732780064}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &779790845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779790843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f948baa8273b2848b97bbdece8e0665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fondo: {fileID: 779790847}
-  offSet: 0.2
 --- !u!64 &779790846
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1132,7 +1117,7 @@ RectTransform:
   - {fileID: 808466402}
   - {fileID: 1346416026}
   m_Father: {fileID: 1357981765}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1358,9 +1343,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2047483751}
-        m_TargetAssemblyTypeName: ControlBotton, Assembly-CSharp
-        m_MethodName: VolverAJugar
+      - m_Target: {fileID: 1117509944}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BotonRecargaEscena
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1495,9 +1480,10 @@ GameObject:
   - component: {fileID: 1117509944}
   - component: {fileID: 1117509946}
   - component: {fileID: 1117509945}
+  - component: {fileID: 1117509947}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1530,17 +1516,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pantallas:
   - {fileID: 1467577488}
+  - {fileID: 321115748}
+  - {fileID: 1325463975}
   - {fileID: 2114476916}
   - {fileID: 788853759}
   - {fileID: 2008959172}
-  - {fileID: 321115748}
-  - {fileID: 1325463975}
+  pantalla0: 0
+  pantalla1: 0
+  pantalla2: 0
+  pantalla3: 0
+  pantalla4: 0
+  pantalla5: 0
   iniciarJuego: 0
   estasMuerto: 0
   ganaste: 0
   sliderHabilidad: {fileID: 159903767}
   sonidoMenu: {fileID: 1117509946}
   sonidoPrincipal: {fileID: 1117509945}
+  sonidoBoton: {fileID: 1117509947}
+  jugador: {fileID: 6838228356415268910, guid: c53d134525d80a8488646a7e551c447f, type: 3}
+  Enemy: {fileID: 2204867210816670599, guid: ab54061420ea1ca41bb7e63f7359c181, type: 3}
+  PlayerPlay: {fileID: 0}
+  meshRenderersFondo:
+  - {fileID: 1444505050}
+  - {fileID: 1511266665}
+  - {fileID: 779790847}
+  - {fileID: 1567498608}
+  - {fileID: 2029664451}
+  velocidadFondo0: 0.1
+  velocidadFondo1: 0.1
+  velocidadFondo2: 0.2
+  velocidadFondo3: 0.3
+  velocidadFondo4: 0.5
+  dificultad: 0
+  imagesDificultad:
+  - {fileID: 804452431}
+  - {fileID: 670232147}
+  imagenesActivas: 0
+  keyboardControl:
+  - {fileID: 1420536234}
+  - {fileID: 1658287179}
+  - {fileID: 1847657118}
+  keyboardControl1:
+  - {fileID: 1834361740}
+  - {fileID: 1360962868}
+  keyboardControl2:
+  - {fileID: 808466401}
+  - {fileID: 1346416025}
+  keyboardControl3:
+  - {fileID: 372505292}
+  - {fileID: 1831504125}
+  keyboadValue: 0
+  keyboardValue1: 0
+  keyboardValue2: 0
+  keyboardValue3: 0
 --- !u!82 &1117509945
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1652,6 +1681,102 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &1117509947
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117509942}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 98e906359a0d3014e85712568b574cb9, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2065,7 +2190,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1246297094
 GameObject:
@@ -2325,7 +2450,7 @@ RectTransform:
   - {fileID: 159903766}
   - {fileID: 1893241896}
   m_Father: {fileID: 1357981765}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2476,9 +2601,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2047483751}
-        m_TargetAssemblyTypeName: ControlBotton, Assembly-CSharp
-        m_MethodName: Salir
+      - m_Target: {fileID: 1117509944}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BotonSalirDelJuego
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2619,12 +2744,12 @@ RectTransform:
   m_Children:
   - {fileID: 1467577485}
   - {fileID: 321115745}
+  - {fileID: 1325463972}
   - {fileID: 2114476913}
   - {fileID: 788853756}
   - {fileID: 2008959169}
-  - {fileID: 1325463972}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2714,9 +2839,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2047483751}
-        m_TargetAssemblyTypeName: ControlBotton, Assembly-CSharp
-        m_MethodName: Salir
+      - m_Target: {fileID: 1117509944}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BotonSalirDelJuego
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2846,9 +2971,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2047483751}
-        m_TargetAssemblyTypeName: ControlBotton, Assembly-CSharp
-        m_MethodName: BotonInicarJuego
+      - m_Target: {fileID: 1117509944}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BotonIniciarJuego
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3158,9 +3283,8 @@ GameObject:
   - component: {fileID: 1511266666}
   - component: {fileID: 1511266665}
   - component: {fileID: 1511266664}
-  - component: {fileID: 1511266663}
   m_Layer: 0
-  m_Name: Back Ground (1)
+  m_Name: Back Ground Troncos oscuros
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3180,20 +3304,6 @@ Transform:
   m_Father: {fileID: 732780064}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1511266663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511266661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f948baa8273b2848b97bbdece8e0665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fondo: {fileID: 1511266665}
-  offSet: 0.1
 --- !u!64 &1511266664
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3305,9 +3415,8 @@ GameObject:
   - component: {fileID: 1567498609}
   - component: {fileID: 1567498608}
   - component: {fileID: 1567498607}
-  - component: {fileID: 1567498606}
   m_Layer: 0
-  m_Name: Back Ground (3)
+  m_Name: Back Ground Arbustos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3327,20 +3436,6 @@ Transform:
   m_Father: {fileID: 732780064}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1567498606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1567498604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f948baa8273b2848b97bbdece8e0665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fondo: {fileID: 1567498608}
-  offSet: 0.3
 --- !u!64 &1567498607
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3486,9 +3581,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2047483751}
-        m_TargetAssemblyTypeName: ControlBotton, Assembly-CSharp
-        m_MethodName: SeleccionarDificultad
+      - m_Target: {fileID: 1117509944}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BotonPantallaDificultad
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3827,9 +3922,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2047483751}
-        m_TargetAssemblyTypeName: ControlBotton, Assembly-CSharp
-        m_MethodName: SeleccionarDificultad
+      - m_Target: {fileID: 1117509944}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BotonPantallaDificultad
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3960,9 +4055,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2047483751}
-        m_TargetAssemblyTypeName: ControlBotton, Assembly-CSharp
-        m_MethodName: VolverAJugar
+      - m_Target: {fileID: 1117509944}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BotonRecargaEscena
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4092,9 +4187,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2047483751}
-        m_TargetAssemblyTypeName: ControlBotton, Assembly-CSharp
-        m_MethodName: Salir
+      - m_Target: {fileID: 1117509944}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BotonSalirDelJuego
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4519,7 +4614,7 @@ RectTransform:
   - {fileID: 1834361741}
   - {fileID: 1360962869}
   m_Father: {fileID: 1357981765}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4674,7 +4769,6 @@ GameObject:
   - component: {fileID: 2029664452}
   - component: {fileID: 2029664451}
   - component: {fileID: 2029664450}
-  - component: {fileID: 2029664449}
   m_Layer: 0
   m_Name: Carretera
   m_TagString: Untagged
@@ -4696,20 +4790,6 @@ Transform:
   m_Father: {fileID: 732780064}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2029664449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029664447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f948baa8273b2848b97bbdece8e0665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fondo: {fileID: 2029664451}
-  offSet: 0.5
 --- !u!64 &2029664450
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4773,173 +4853,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029664447}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2047483750
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2047483752}
-  - component: {fileID: 2047483751}
-  - component: {fileID: 2047483753}
-  m_Layer: 0
-  m_Name: Control Bottons
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2047483751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047483750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dee99a7a5e60d354bb9d0b7e0a180d46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  botonesIniciales:
-  - {fileID: 1420536234}
-  - {fileID: 1658287179}
-  - {fileID: 1847657118}
-  botonesDificultad:
-  - {fileID: 0}
-  - {fileID: 372505292}
-  botonesGanaste:
-  - {fileID: 808466401}
-  - {fileID: 1346416025}
-  botonesPerdiste:
-  - {fileID: 1834361740}
-  - {fileID: 1360962868}
-  imagenBoton:
-  - {fileID: 804452431}
-  - {fileID: 670232147}
-  valorBotonesIniciales: 0
-  valorBotonesPerdiste: 0
-  valorBotonesGanaste: 0
-  inicio: 0
-  muerto: 0
-  ganar: 0
-  dificultad: 0
-  jugadorYEnemigo:
-  - {fileID: 6838228356415268910, guid: c53d134525d80a8488646a7e551c447f, type: 3}
-  - {fileID: 2204867210816670599, guid: ab54061420ea1ca41bb7e63f7359c181, type: 3}
-  sonidoBotones: {fileID: 2047483753}
---- !u!4 &2047483752
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047483750}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &2047483753
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047483750}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 98e906359a0d3014e85712568b574cb9, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &2114476912
 GameObject:
   m_ObjectHideFlags: 0
@@ -4973,7 +4886,7 @@ RectTransform:
   - {fileID: 2027814743}
   - {fileID: 1160116595}
   m_Father: {fileID: 1357981765}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

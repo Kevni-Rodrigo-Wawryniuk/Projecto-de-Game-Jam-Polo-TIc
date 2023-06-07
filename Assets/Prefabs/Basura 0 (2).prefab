@@ -168,5 +168,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RgbObs: {fileID: 0}
-  fuerzaDeMovimiento: 2
+  fuerzaDeMovimiento: 10
   Rotar: 200

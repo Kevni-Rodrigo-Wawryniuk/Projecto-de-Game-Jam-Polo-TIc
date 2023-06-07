@@ -32,15 +32,6 @@ public class Obstaculo : MonoBehaviour
     void StartProgram()
     {
         RgbObs = GetComponent<Rigidbody2D>();
-
-        if (ControlBotton.controlBotton.dificultad == 0)
-        {
-            fuerzaDeMovimiento = Random.Range(12, 16);
-        }
-        if (ControlBotton.controlBotton.dificultad == 1)
-        {
-            fuerzaDeMovimiento = Random.Range(16, 20);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
